@@ -67,7 +67,7 @@
         <li class="header">MAIN NAVIGATION</li>
         <li class="treeview">
           <a href="#">
-            <i class="fas fa-tachometer-alt"></i> <span>Dashboard</span>
+            <i class="fas fa-tachometer-alt"></i> <span>Example</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
@@ -77,7 +77,17 @@
             <li><a href="../../index2.html"><i class="fa fa-circle"></i> Dashboard v2</a></li>
           </ul>
         </li>
-        <li><a href="https://adminlte.io/docs"><i class="fa fa-book"></i> <span>Documentation</span></a></li>
+        <li><a href="https://adminlte.io/docs"><i class="fas fa-tachometer-alt"></i> <span>Dashboard</span></a></li>
+        <li><a href="https://adminlte.io/docs"><i class="fa fa-book"></i> <span>Users</span></a></li>
+        <li>
+           <a href="{{ route('logout') }}" onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                    
+                                    <i class="fas fa-power-off"></i> <span>Logout</span></a>
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                        @csrf
+                                    </form>
+        </li>
         
       </ul>
     </section>
