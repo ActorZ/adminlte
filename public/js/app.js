@@ -1930,6 +1930,31 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
     console.log('Component mounted.');
@@ -35389,66 +35414,157 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "container" }, [
+    return _c("div", [
       _c("section", { staticClass: "content-header" }),
       _vm._v(" "),
-      _c("div", { staticClass: "box" }, [
-        _c("div", { staticClass: "w3-example" }, [
-          _c("h3", [_vm._v("Example")]),
+      _c("section", { staticClass: "content" }, [
+        _c("div", { staticClass: "box" }, [
+          _c("div", { staticClass: "box-header with-border" }, [
+            _c("h3", { staticClass: "box-title" }, [_vm._v("Users")]),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-success pull-right",
+                attrs: {
+                  "data-toggle": "modal",
+                  "data-target": "#addUserModal"
+                }
+              },
+              [
+                _vm._v("Add new user "),
+                _c("i", { staticClass: "fas fa-user-plus" })
+              ]
+            )
+          ]),
           _vm._v(" "),
-          _c("div", { staticClass: "w3-padding w3-white notranslate" }, [
-            _c("table", { staticClass: "table table-condensed" }, [
-              _c("thead", [
-                _c("tr", [
-                  _c("th", [_vm._v("Firstname")]),
-                  _vm._v(" "),
-                  _c("th", [_vm._v("Lastname")]),
-                  _vm._v(" "),
-                  _c("th", [_vm._v("Email")])
-                ])
-              ]),
-              _vm._v(" "),
-              _c("tbody", [
-                _c("tr", [
-                  _c("td", [_vm._v("John")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v("Doe")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v("john@example.com")])
+          _c("div", { staticClass: "box-body" }, [
+            _c("div", { staticClass: "w3-padding w3-white notranslate" }, [
+              _c("table", { staticClass: "table table-condensed" }, [
+                _c("thead", [
+                  _c("tr", [
+                    _c("th", [_vm._v("Id")]),
+                    _vm._v(" "),
+                    _c("th", [_vm._v("Name")]),
+                    _vm._v(" "),
+                    _c("th", [_vm._v("Email")]),
+                    _vm._v(" "),
+                    _c("th", [_vm._v("Type")]),
+                    _vm._v(" "),
+                    _c("th", [_vm._v("Action")])
+                  ])
                 ]),
                 _vm._v(" "),
-                _c("tr", [
-                  _c("td", [_vm._v("Mary")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v("Moe")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v("mary@example.com")])
-                ]),
-                _vm._v(" "),
-                _c("tr", [
-                  _c("td", [_vm._v("July")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v("Dooley")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v("july@example.com")])
+                _c("tbody", [
+                  _c("tr", [
+                    _c("td", [_vm._v("1")]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v("Doe")]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v("john@example.com")]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v("Admin")]),
+                    _vm._v(" "),
+                    _c("td", [
+                      _c("a", { attrs: { href: "#" } }, [
+                        _c("i", { staticClass: "fas fa-edit" }, [
+                          _vm._v("edit")
+                        ])
+                      ]),
+                      _vm._v(
+                        "\n                      //\n                      "
+                      ),
+                      _c("a", { attrs: { href: "#" } }, [
+                        _c("i", { staticClass: "fas fa-trash" }, [
+                          _vm._v("delete")
+                        ])
+                      ])
+                    ])
+                  ])
                 ])
               ])
             ])
-          ]),
-          _vm._v(" "),
-          _c(
-            "a",
-            {
-              staticClass: "w3-btn w3-margin-top w3-margin-bottom",
-              attrs: {
-                target: "_blank",
-                href: "tryit.asp?filename=trybs_table_condensed&stacked=h"
-              }
-            },
-            [_vm._v("Try it Yourself »")]
-          )
+          ])
         ])
-      ])
+      ]),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          staticClass: "modal fade",
+          attrs: {
+            id: "addUserModal",
+            tabindex: "-1",
+            role: "dialog",
+            "aria-labelledby": "addUserModalLabel",
+            "aria-hidden": "true"
+          }
+        },
+        [
+          _c(
+            "div",
+            {
+              staticClass: "modal-dialog modal-dialog-centered",
+              attrs: { role: "document" }
+            },
+            [
+              _c("div", { staticClass: "modal-content" }, [
+                _c("div", { staticClass: "modal-header" }, [
+                  _c(
+                    "h5",
+                    {
+                      staticClass: "modal-title",
+                      attrs: { id: "addUserModalLabel" }
+                    },
+                    [_vm._v("Add new user")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "close",
+                      attrs: {
+                        type: "button",
+                        "data-dismiss": "modal",
+                        "aria-label": "Close"
+                      }
+                    },
+                    [
+                      _c("span", { attrs: { "aria-hidden": "true" } }, [
+                        _vm._v("×")
+                      ])
+                    ]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "modal-body" }, [
+                  _vm._v("\n              ...\n            ")
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "modal-footer" }, [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-secondary",
+                      attrs: { type: "button", "data-dismiss": "modal" }
+                    },
+                    [_vm._v("Close")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-primary",
+                      attrs: { type: "button" }
+                    },
+                    [_vm._v("Create")]
+                  )
+                ])
+              ])
+            ]
+          )
+        ]
+      )
     ])
   }
 ]
