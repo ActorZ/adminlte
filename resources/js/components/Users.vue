@@ -52,13 +52,55 @@
                       <span aria-hidden="true">&times;</span>
                     </button>
                   </div>
+                  <form @submit.prevent="login" @keydown="form.onKeydown($event)">
                   <div class="modal-body">
-                    ...
+                        
+                            <div class="form-group">
+                              <label>Name</label>
+                              <input v-model="form.name" type="text" name="name" id="name" 
+                                class="form-control" :class="{ 'is-invalid': form.errors.has('name') }">
+                              <has-error :form="form" field="name"></has-error>
+                            </div>
+                            <div class="form-group">
+                              <label>Email</label>
+                              <input v-model="form.email" type="text" name="email" id="email" 
+                                class="form-control" :class="{ 'is-invalid': form.errors.has('email') }">
+                              <has-error :form="form" field="email"></has-error>
+                            </div>
+                            <div class="form-group">
+                              <label>Bio</label>
+                              <textarea v-model="form.bio" type="text" name="bio" id="bio" 
+                                class="form-control" :class="{ 'is-invalid': form.errors.has('bio') }">
+                              </textarea>
+                              <has-error :form="form" field="bio"></has-error>
+                            </div>
+                            <div class="form-group">
+                              <label>User role</label>
+                              <select v-model="form.type" name="type" id="type" 
+                                class="form-control" :class="{ 'is-invalid': form.errors.has('type') }">
+                                  <option value="">Select user role</option>
+                                  <option value="admin">Admin</option>
+                                  <option value="user">Standard user</option>
+                                  <option value="author">Author</option>
+                              </select>
+                              <has-error :form="form" field="type"></has-error>
+                            </div>
+
+                            <div class="form-group">
+                              <label>Password</label>
+                              <input v-model="form.password" type="password" name="password"
+                                class="form-control" :class="{ 'is-invalid': form.errors.has('password') }">
+                              <has-error :form="form" field="password"></has-error>
+                            </div>
+
+                            
+                        
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Create</button>
+                    <button :disabled="form.busy" type="submit" class="btn btn-primary">Create</button>
                   </div>
+                  </form>
                 </div>
               </div>
             </div>
@@ -69,6 +111,19 @@
 
 <script>
     export default {
+        data () {
+                return {
+                  // Create a new form instance
+                  form: new Form({
+                    name: '',
+                    email: '',
+                    password: '',
+                    type: '',
+                    bio: '',
+                    photo: ''
+                  })
+                }
+              },
         mounted() {
             console.log('Component mounted.')
         }
