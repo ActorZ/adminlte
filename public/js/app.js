@@ -2011,6 +2011,11 @@ __webpack_require__.r(__webpack_exports__);
       })
     };
   },
+  methods: {
+    createUser: function createUser() {
+      this.form.post('api/user');
+    }
+  },
   mounted: function mounted() {
     console.log('Component mounted.');
   }
@@ -36484,7 +36489,7 @@ var render = function() {
                   on: {
                     submit: function($event) {
                       $event.preventDefault()
-                      return _vm.login($event)
+                      return _vm.createUser($event)
                     },
                     keydown: function($event) {
                       return _vm.form.onKeydown($event)
