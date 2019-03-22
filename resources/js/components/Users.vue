@@ -133,7 +133,19 @@
            },
            createUser(){
              this.$Progress.start();
+
              this.form.post('api/user');
+
+             $('#addUserModal').modal('hide')
+
+             swal.fire({
+              position: 'top-end',
+              type: 'success',
+              title: 'User created',
+              showConfirmButton: false,
+              timer: 1500
+            })
+
              this.$Progress.finish();
            }
         },

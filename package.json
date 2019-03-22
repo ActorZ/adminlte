@@ -27,6 +27,8 @@
         "@fortawesome/fontawesome-free": "^5.7.2",
         "admin-lte": "^2.4.10",
         "moment": "^2.24.0",
+        "sweetalert": "^2.1.2",
+        "sweetalert2": "^8.5.0",
         "vform": "^1.0.0",
         "vue-progressbar": "^0.7.5",
         "vue-router": "^3.0.2"
