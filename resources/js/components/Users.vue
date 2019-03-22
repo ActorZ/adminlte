@@ -134,21 +134,36 @@
            createUser(){
              this.$Progress.start();
 
-             this.form.post('api/user');
+             this.form.post('api/user')
+             //if is successful
+             .then( () => {
+                Fire.$emit('AfterCreate')
 
-             Fire.$emit('AfterCreate')
+                $('#addUserModal').modal('hide')
 
-             $('#addUserModal').modal('hide')
+                 swal.fire({
+                  position: 'top-end',
+                  type: 'success',
+                  title: 'User created',
+                  showConfirmButton: false,
+                  timer: 1500
+                })
 
-             swal.fire({
-              position: 'top-end',
-              type: 'success',
-              title: 'User created',
-              showConfirmButton: false,
-              timer: 1500
-            })
+                 this.$Progress.finish();
 
-             this.$Progress.finish();
+             })
+             //if not
+             .catch( () => {
+                swal.fire({
+                  //position: 'top-end',
+                  type: 'error',
+                  title: 'Fill in all fields',
+                  showConfirmButton: false,
+                  timer: 1500
+                })
+             })
+
+             
            }
         },
         created() {

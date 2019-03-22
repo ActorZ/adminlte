@@ -1991,26 +1991,40 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     createUser: function createUser() {
+      var _this2 = this;
+
       this.$Progress.start();
-      this.form.post('api/user');
-      Fire.$emit('AfterCreate');
-      $('#addUserModal').modal('hide');
-      swal.fire({
-        position: 'top-end',
-        type: 'success',
-        title: 'User created',
-        showConfirmButton: false,
-        timer: 1500
+      this.form.post('api/user') //if is successful
+      .then(function () {
+        Fire.$emit('AfterCreate');
+        $('#addUserModal').modal('hide');
+        swal.fire({
+          position: 'top-end',
+          type: 'success',
+          title: 'User created',
+          showConfirmButton: false,
+          timer: 1500
+        });
+
+        _this2.$Progress.finish();
+      }) //if not
+      .catch(function () {
+        swal.fire({
+          //position: 'top-end',
+          type: 'error',
+          title: 'Fill in all fields',
+          showConfirmButton: false,
+          timer: 1500
+        });
       });
-      this.$Progress.finish();
     }
   },
   created: function created() {
-    var _this2 = this;
+    var _this3 = this;
 
     this.showUsers();
     Fire.$on('AfterCreate', function () {
-      _this2.showUsers();
+      _this3.showUsers();
     });
   }
 });
