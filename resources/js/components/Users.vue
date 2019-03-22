@@ -136,6 +136,8 @@
 
              this.form.post('api/user');
 
+             Fire.$emit('AfterCreate')
+
              $('#addUserModal').modal('hide')
 
              swal.fire({
@@ -151,6 +153,9 @@
         },
         created() {
             this.showUsers();
+            Fire.$on('AfterCreate',() => {
+                 this.showUsers() 
+            });
         }
     }
 </script>
