@@ -1985,10 +1985,12 @@ __webpack_require__.r(__webpack_exports__);
     showUsers: function showUsers() {
       var _this = this;
 
+      this.$Progress.start();
       axios.get("api/user").then(function (_ref) {
         var data = _ref.data;
         return _this.users = data.data;
       });
+      this.$Progress.finish();
     },
     createUser: function createUser() {
       var _this2 = this;
@@ -2017,14 +2019,41 @@ __webpack_require__.r(__webpack_exports__);
           timer: 1500
         });
       });
+    },
+    deleteUser: function deleteUser(id) {
+      var _this3 = this;
+
+      swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+      }).then(function (result) {
+        //send ajax request for deleting
+        if (result.value) {
+          _this3.form.delete('api/user/' + id).then(function () {
+            swal.fire('Deleted!', 'Your file has been deleted.', 'success');
+          });
+        }
+
+        Fire.$emit('AfterDelete');
+      }).catch(function () {
+        swal("Failed!", "There is something wrong", "warning");
+      });
     }
   },
   created: function created() {
-    var _this3 = this;
+    var _this4 = this;
 
     this.showUsers();
     Fire.$on('AfterCreate', function () {
-      _this3.showUsers();
+      _this4.showUsers();
+    });
+    Fire.$on('AfterDelete', function () {
+      _this4.showUsers();
     });
   }
 });
@@ -56686,7 +56715,28 @@ var render = function() {
                       _vm._v(_vm._s(_vm._f("myDate")(user.created_at)))
                     ]),
                     _vm._v(" "),
-                    _vm._m(2, true)
+                    _c("td", [
+                      _vm._m(2, true),
+                      _vm._v(
+                        "\n                      //\n                      "
+                      ),
+                      _c(
+                        "a",
+                        {
+                          attrs: { href: "#" },
+                          on: {
+                            click: function($event) {
+                              return _vm.deleteUser(user.id)
+                            }
+                          }
+                        },
+                        [
+                          _c("i", { staticClass: "fas fa-trash" }, [
+                            _vm._v("delete")
+                          ])
+                        ]
+                      )
+                    ])
                   ])
                 }),
                 0
@@ -57024,14 +57074,8 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("td", [
-      _c("a", { attrs: { href: "#" } }, [
-        _c("i", { staticClass: "fas fa-edit" }, [_vm._v("edit")])
-      ]),
-      _vm._v("\n                      //\n                      "),
-      _c("a", { attrs: { href: "#" } }, [
-        _c("i", { staticClass: "fas fa-trash" }, [_vm._v("delete")])
-      ])
+    return _c("a", { attrs: { href: "#" } }, [
+      _c("i", { staticClass: "fas fa-edit" }, [_vm._v("edit")])
     ])
   },
   function() {
@@ -71861,7 +71905,7 @@ Vue.use(vue_router__WEBPACK_IMPORTED_MODULE_0__["default"]);
 Vue.use(vue_progressbar__WEBPACK_IMPORTED_MODULE_3___default.a, {
   color: 'rgb(143, 255, 199)',
   failedColor: 'red',
-  height: '20px'
+  height: '160px'
 });
 var routes = [{
   path: '/dashboard',

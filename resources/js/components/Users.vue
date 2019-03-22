@@ -34,7 +34,7 @@
                           <td>
                             <a href="#"><i class="fas fa-edit">edit</i></a>
                             //
-                            <a href="#"><i class="fas fa-trash">delete</i></a>
+                            <a href="#" @click="deleteUser(user.id)"><i class="fas fa-trash">delete</i></a>
                           </td>
                         </tr>
                         </tbody>
@@ -129,7 +129,9 @@
               },
         methods: {
            showUsers(){
+              this.$Progress.start();
               axios.get("api/user").then( ({ data }) => (this.users = data.data) );
+              this.$Progress.finish();
            },
            createUser(){
              this.$Progress.start();
@@ -164,11 +166,40 @@
              })
 
              
+           },
+           deleteUser(id){
+                swal.fire({
+                  title: 'Are you sure?',
+                  text: "You won't be able to revert this!",
+                  type: 'warning',
+                  showCancelButton: true,
+                  confirmButtonColor: '#3085d6',
+                  cancelButtonColor: '#d33',
+                  confirmButtonText: 'Yes, delete it!'
+                }).then((result) => {
+                    //send ajax request for deleting
+                    
+                    if (result.value) {
+                      this.form.delete('api/user/' + id).then( () => {
+                       swal.fire(
+                      'Deleted!',
+                      'Your file has been deleted.',
+                      'success'
+                    )
+                  })
+                }
+                Fire.$emit('AfterDelete')
+                }).catch( () => {
+                    swal("Failed!","There is something wrong","warning")
+                })
            }
         },
         created() {
             this.showUsers();
             Fire.$on('AfterCreate',() => {
+                 this.showUsers() 
+            });
+            Fire.$on('AfterDelete',() => {
                  this.showUsers() 
             });
         }
