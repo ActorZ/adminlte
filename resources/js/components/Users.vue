@@ -8,7 +8,7 @@
             <div class="box">
                     <div class="box-header with-border">
                           <h3 class="box-title">Users</h3>
-                          <button class="btn btn-success pull-right" data-toggle="modal" data-target="#addUserModal">Add new user <i class="fas fa-user-plus"></i> </button>
+                          <button class="btn btn-success pull-right" @click="newModal">Add new user <i class="fas fa-user-plus"></i> </button>
                     </div>
 
                     <div class="box-body">
@@ -128,6 +128,14 @@
                 }
               },
         methods: {
+           editModal(user){
+              this.form.reset();
+              $('#editUserModal').modal('show');
+           },
+           newModal(){
+              this.form.reset();
+              $('#addUserModal').modal('show');
+           },
            showUsers(){
               this.$Progress.start();
               axios.get("api/user").then( ({ data }) => (this.users = data.data) );
