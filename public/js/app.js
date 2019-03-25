@@ -1983,8 +1983,8 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     editModal: function editModal(user) {
-      this.form.reset();
-      $('#editUserModal').modal('show');
+      this.form.fill(user);
+      $('#addUserModal').modal('show');
     },
     newModal: function newModal() {
       this.form.reset();
@@ -56738,7 +56738,22 @@ var render = function() {
                     ]),
                     _vm._v(" "),
                     _c("td", [
-                      _vm._m(1, true),
+                      _c(
+                        "a",
+                        {
+                          attrs: { href: "#" },
+                          on: {
+                            click: function($event) {
+                              return _vm.editModal(user)
+                            }
+                          }
+                        },
+                        [
+                          _c("i", { staticClass: "fas fa-edit" }, [
+                            _vm._v("edit")
+                          ])
+                        ]
+                      ),
                       _vm._v(
                         "\n                      //\n                      "
                       ),
@@ -56790,7 +56805,7 @@ var render = function() {
           },
           [
             _c("div", { staticClass: "modal-content" }, [
-              _vm._m(2),
+              _vm._m(1),
               _vm._v(" "),
               _c(
                 "form",
@@ -57073,14 +57088,6 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", [_vm._v("Action")])
       ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("a", { attrs: { href: "#" } }, [
-      _c("i", { staticClass: "fas fa-edit" }, [_vm._v("edit")])
     ])
   },
   function() {

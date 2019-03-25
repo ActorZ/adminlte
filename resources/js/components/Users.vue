@@ -32,7 +32,7 @@
                           <td>{{ user.type | upText }}</td>
                           <td>{{ user.created_at | myDate }}</td>
                           <td>
-                            <a href="#"><i class="fas fa-edit">edit</i></a>
+                            <a href="#" @click="editModal(user)"><i class="fas fa-edit">edit</i></a>
                             //
                             <a href="#" @click="deleteUser(user.id)"><i class="fas fa-trash">delete</i></a>
                           </td>
@@ -129,8 +129,8 @@
               },
         methods: {
            editModal(user){
-              this.form.reset();
-              $('#editUserModal').modal('show');
+              this.form.fill(user);
+              $('#addUserModal').modal('show');
            },
            newModal(){
               this.form.reset();
