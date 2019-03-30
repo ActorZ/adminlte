@@ -1975,6 +1975,7 @@ __webpack_require__.r(__webpack_exports__);
       users: {},
       // Create a new form instance
       form: new Form({
+        id: '',
         name: '',
         email: '',
         password: '',
@@ -1985,6 +1986,34 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
+    updateUser: function updateUser() {
+      var _this = this;
+
+      this.$Progress.start();
+      this.form.put('api/user/' + this.form.id).then(function () {
+        $('#addUserModal').modal('hide');
+        Fire.$emit('AfterUpdate');
+        swal.fire({
+          position: 'top-end',
+          type: 'success',
+          title: 'User updated',
+          showConfirmButton: false,
+          timer: 1500
+        });
+      }) //if not
+      .catch(function () {
+        _this.$Progress.fail();
+
+        swal.fire({
+          //position: 'top-end',
+          type: 'error',
+          title: 'Error!',
+          showConfirmButton: false,
+          timer: 1500
+        });
+      });
+      this.$Progress.finish();
+    },
     editModal: function editModal(user) {
       this.editmode = true;
       this.form.fill(user);
@@ -1995,17 +2024,17 @@ __webpack_require__.r(__webpack_exports__);
       $('#addUserModal').modal('show');
     },
     showUsers: function showUsers() {
-      var _this = this;
+      var _this2 = this;
 
       this.$Progress.start();
       axios.get("api/user").then(function (_ref) {
         var data = _ref.data;
-        return _this.users = data.data;
+        return _this2.users = data.data;
       });
       this.$Progress.finish();
     },
     createUser: function createUser() {
-      var _this2 = this;
+      var _this3 = this;
 
       this.$Progress.start();
       this.form.post('api/user') //if is successful
@@ -2020,7 +2049,7 @@ __webpack_require__.r(__webpack_exports__);
           timer: 1500
         });
 
-        _this2.$Progress.finish();
+        _this3.$Progress.finish();
       }) //if not
       .catch(function () {
         swal.fire({
@@ -2033,7 +2062,7 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     deleteUser: function deleteUser(id) {
-      var _this3 = this;
+      var _this4 = this;
 
       swal.fire({
         title: 'Are you sure?',
@@ -2046,7 +2075,7 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (result) {
         //send ajax request for deleting
         if (result.value) {
-          _this3.form.delete('api/user/' + id).then(function () {
+          _this4.form.delete('api/user/' + id).then(function () {
             swal.fire('Deleted!', 'Your file has been deleted.', 'success');
           });
         }
@@ -2057,16 +2086,18 @@ __webpack_require__.r(__webpack_exports__);
       });
     }
   },
-  updateUser: function updateUser(id) {},
   created: function created() {
-    var _this4 = this;
+    var _this5 = this;
 
     this.showUsers();
     Fire.$on('AfterCreate', function () {
-      _this4.showUsers();
+      _this5.showUsers();
     });
     Fire.$on('AfterDelete', function () {
-      _this4.showUsers();
+      _this5.showUsers();
+    });
+    Fire.$on('AfterUpdate', function () {
+      _this5.showUsers();
     });
   }
 });
@@ -56854,7 +56885,7 @@ var render = function() {
                   on: {
                     submit: function($event) {
                       $event.preventDefault()
-                      _vm.editmode ? _vm.updateUser : _vm.createUser
+                      _vm.editmode ? _vm.updateUser() : _vm.createUser()
                     }
                   }
                 },

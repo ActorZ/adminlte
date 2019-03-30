@@ -55,7 +55,7 @@
                       <span aria-hidden="true">&times;</span>
                     </button>
                   </div>
-                  <form @submit.prevent="editmode ? updateUser : createUser">
+                  <form @submit.prevent="editmode ? updateUser() : createUser()">
                   <div class="modal-body">
                         
                             <div class="form-group">
@@ -121,6 +121,7 @@
                   users: {},  
                   // Create a new form instance
                   form: new Form({
+                    id: '',
                     name: '',
                     email: '',
                     password: '',
@@ -131,6 +132,33 @@
                 }
               },
         methods: {
+            updateUser(){
+            this.$Progress.start();
+            this.form.put('api/user/' + this.form.id).then( () => {
+                
+                $('#addUserModal').modal('hide')
+                Fire.$emit('AfterUpdate')
+                 swal.fire({
+                  position: 'top-end',
+                  type: 'success',
+                  title: 'User updated',
+                  showConfirmButton: false,
+                  timer: 1500
+                })
+
+                  }) //if not
+             .catch( () => {
+                this.$Progress.fail()
+                swal.fire({
+                  //position: 'top-end',
+                  type: 'error',
+                  title: 'Error!',
+                  showConfirmButton: false,
+                  timer: 1500
+                })
+             })
+             this.$Progress.finish(); 
+         },
            editModal(user){
               this.editmode = true;
               this.form.fill(user);
@@ -205,8 +233,7 @@
                     swal("Failed!","There is something wrong","warning")
                 })
            }
-        },
-          updateUser(id){
+       
 
         },
         created() {
@@ -217,6 +244,10 @@
             Fire.$on('AfterDelete',() => {
                  this.showUsers() 
             });
+            Fire.$on('AfterUpdate',() => {
+                 this.showUsers() 
+            });
+           
         }
     }
 </script>
