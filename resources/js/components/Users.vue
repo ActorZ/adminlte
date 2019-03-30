@@ -49,12 +49,13 @@
               <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h5 class="modal-title" id="addUserModalLabel">Add new user</h5>
+                    <h5 v-show="!editmode" class="modal-title" id="addUserModalLabel">Add new user</h5>
+                    <h5 v-show="editmode" class="modal-title" id="addUserModalLabel">Edit user</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                       <span aria-hidden="true">&times;</span>
                     </button>
                   </div>
-                  <form @submit.prevent="createUser" @keydown="form.onKeydown($event)">
+                  <form @submit.prevent="editmode ? updateUser : createUser">
                   <div class="modal-body">
                         
                             <div class="form-group">
@@ -100,7 +101,8 @@
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button :disabled="form.busy" type="submit" class="btn btn-primary">Create</button>
+                    <button  v-show="!editmode" type="submit" class="btn btn-primary">Create</button>
+                     <button v-show="editmode" type="submit" class="btn btn-primary">Edit</button>
                   </div>
                   </form>
                 </div>
@@ -115,6 +117,7 @@
     export default {
         data () {
                 return {
+                  editmode: false,
                   users: {},  
                   // Create a new form instance
                   form: new Form({
@@ -129,6 +132,7 @@
               },
         methods: {
            editModal(user){
+              this.editmode = true;
               this.form.fill(user);
               $('#addUserModal').modal('show');
            },
@@ -201,6 +205,9 @@
                     swal("Failed!","There is something wrong","warning")
                 })
            }
+        },
+          updateUser(id){
+
         },
         created() {
             this.showUsers();
