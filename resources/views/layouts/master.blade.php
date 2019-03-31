@@ -79,6 +79,7 @@
         </li>
         <li><router-link to="/dashboard"><i class="fas fa-tachometer-alt"></i> <span>Dashboard</span></router-link></li>
         <li><router-link to="/users"><i class="fa fa-users"></i> <span>Users</span></router-link></li>
+        <li><router-link to="/developer"><i class="fa fa-book"></i> <span>Developer</span></router-link></li>
         <li><router-link to="/profile"><i class="fa fa-book"></i> <span>Profile</span></router-link></li>
         <li>
            <a href="{{ route('logout') }}" onclick="event.preventDefault();
