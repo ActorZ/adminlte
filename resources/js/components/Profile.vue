@@ -267,30 +267,40 @@
                     <label for="inputName" class="col-sm-2 control-label">Name</label>
 
                     <div class="col-sm-10">
-                      <input v-model="form.name" type="text" class="form-control" id="inputName" placeholder="Name">
+                      <input v-model="form.name" type="text" class="form-control" id="inputName" placeholder="Name"
+                      name="name">
                     </div>
                   </div>
                   <div class="form-group">
                     <label for="inputEmail" class="col-sm-2 control-label">Email</label>
 
                     <div class="col-sm-10">
-                      <input v-model="form.email" type="email" class="form-control" id="inputEmail" placeholder="Email">
+                      <input v-model="form.email" type="email" class="form-control" id="inputEmail" placeholder="Email" name="email">
                     </div>
                   </div>
                   <div class="form-group">
-                    <label for="inputName" class="col-sm-2 control-label">Name</label>
+                              <label for="inputBio" class="col-sm-2 control-label">Bio</label>
+                              <div class="col-sm-10">
+                              <textarea v-model="form.bio" type="text" name="bio" id="inputBio" 
+                                class="form-control" :class="{ 'is-invalid': form.errors.has('bio') }">
+                              </textarea>
+                              </div>
+                              <has-error :form="form" field="bio"></has-error>
+                  </div>
+                  <div class="form-group">
+                    <label for="inputName" class="col-sm-2 control-label">Photo</label>
 
                     <div class="col-sm-10">
-                      <input type="text" class="form-control" id="inputName" placeholder="Name">
+                      <input type="file" @change="updateProfile" class="form-control" id="inputFile" name="photo">
                     </div>
                   </div>
-                  <div class="form-group">
+                 <!-- <div class="form-group">
                     <label for="inputExperience" class="col-sm-2 control-label">Experience</label>
 
                     <div class="col-sm-10">
                       <textarea class="form-control" id="inputExperience" placeholder="Experience"></textarea>
                     </div>
-                  </div>
+                  </div> -->
                   <div class="form-group">
                     <label for="inputSkills" class="col-sm-2 control-label">Skills</label>
 
@@ -339,7 +349,19 @@
            }
         },
         mounted() {
-            console.log('Component mounted.')
+            
+        },
+        methods:{
+            updateProfile(e){
+                let file = e.target.files[0]
+            let reader = new FileReader()
+            
+            reader.onloadend = (file) => {
+              //console.log('RESULT',reader.result)
+              this.form.photo = reader.result
+            }
+            reader.readAsDataURL(file)
+            }
         },
         created() {
             axios.get("api/profile").then( ({ data }) => (this.form.fill(data)) );
