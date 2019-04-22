@@ -310,16 +310,7 @@
                   </div>
                   <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
-                      <div class="checkbox">
-                        <label>
-                          <input type="checkbox"> I agree to the <a href="#">terms and conditions</a>
-                        </label>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <div class="col-sm-offset-2 col-sm-10">
-                      <button type="submit" class="btn btn-danger">Submit</button>
+                      <button @click.prevent="updateInfo" type="submit" class="btn btn-danger">Submit</button>
                     </div>
                   </div>
                 </form>
@@ -361,6 +352,15 @@
               this.form.photo = reader.result
             }
             reader.readAsDataURL(file)
+            },
+            updateInfo(){
+              this.form.put('api/profile')
+              .then(()=>{
+
+              })
+              .catch(()=>{
+
+              })
             }
         },
         created() {
