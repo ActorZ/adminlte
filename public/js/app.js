@@ -2195,25 +2195,41 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       var file = e.target.files[0];
+      console.log(file);
       var reader = new FileReader();
 
-      reader.onloadend = function (file) {
-        //console.log('RESULT',reader.result)
-        _this.form.photo = reader.result;
-      };
+      if (file['size'] < 2111775) {
+        reader.onloadend = function (file) {
+          //console.log('RESULT',reader.result)
+          _this.form.photo = reader.result;
+        };
 
-      reader.readAsDataURL(file);
+        reader.readAsDataURL(file);
+      } else {
+        swal({
+          type: error,
+          title: 'Ooops',
+          text: 'To big file'
+        });
+      }
     },
     updateInfo: function updateInfo() {
-      this.form.put('api/profile').then(function () {}).catch(function () {});
+      var _this2 = this;
+
+      this.$Progress.start();
+      this.form.put('api/profile').then(function () {
+        $this.$Progress.finish();
+      }).catch(function () {
+        _this2.$Progress.fail();
+      });
     }
   },
   created: function created() {
-    var _this2 = this;
+    var _this3 = this;
 
     axios.get("api/profile").then(function (_ref) {
       var data = _ref.data;
-      return _this2.form.fill(data);
+      return _this3.form.fill(data);
     });
   }
 });
@@ -58925,7 +58941,7 @@ var staticRenderFns = [
           _vm._v(" "),
           _c("p", [
             _vm._v(
-              "\n                Lorem ipsum represents a long-held tradition for designers,\n                typographers and the like. Some people hate it and argue for\n                its demise, but others ignore the hate as they create awesome\n                tools to help create filler text for everyone from bacon lovers\n                to Charlie Sheen fans.\n              "
+              "\n                                Lorem ipsum represents a long-held tradition for designers,\n                                typographers and the like. Some people hate it and argue for\n                                its demise, but others ignore the hate as they create awesome\n                                tools to help create filler text for everyone from bacon lovers\n                                to Charlie Sheen fans.\n                            "
             )
           ]),
           _vm._v(" "),
@@ -58958,7 +58974,9 @@ var staticRenderFns = [
                 { staticClass: "link-black text-sm", attrs: { href: "#" } },
                 [
                   _c("i", { staticClass: "fa fa-comments-o margin-r-5" }),
-                  _vm._v(" Comments\n                    (5)")
+                  _vm._v(
+                    " Comments\n                                        (5)"
+                  )
                 ]
               )
             ])
@@ -58997,7 +59015,7 @@ var staticRenderFns = [
           _vm._v(" "),
           _c("p", [
             _vm._v(
-              "\n                Lorem ipsum represents a long-held tradition for designers,\n                typographers and the like. Some people hate it and argue for\n                its demise, but others ignore the hate as they create awesome\n                tools to help create filler text for everyone from bacon lovers\n                to Charlie Sheen fans.\n              "
+              "\n                                Lorem ipsum represents a long-held tradition for designers,\n                                typographers and the like. Some people hate it and argue for\n                                its demise, but others ignore the hate as they create awesome\n                                tools to help create filler text for everyone from bacon lovers\n                                to Charlie Sheen fans.\n                            "
             )
           ]),
           _vm._v(" "),
@@ -59119,7 +59137,9 @@ var staticRenderFns = [
                 { staticClass: "link-black text-sm", attrs: { href: "#" } },
                 [
                   _c("i", { staticClass: "fa fa-comments-o margin-r-5" }),
-                  _vm._v(" Comments\n                    (5)")
+                  _vm._v(
+                    " Comments\n                                        (5)"
+                  )
                 ]
               )
             ])
@@ -59161,7 +59181,7 @@ var staticRenderFns = [
             _vm._v(" "),
             _c("div", { staticClass: "timeline-body" }, [
               _vm._v(
-                "\n                    Etsy doostang zoodles disqus groupon greplin oooj voxy zoodles,\n                    weebly ning heekya handango imeem plugg dopplr jibjab, movity\n                    jajah plickers sifteo edmodo ifttt zimbra. Babblely odeo kaboodle\n                    quora plaxo ideeli hulu weebly balihoo...\n                  "
+                "\n                                        Etsy doostang zoodles disqus groupon greplin oooj voxy zoodles,\n                                        weebly ning heekya handango imeem plugg dopplr jibjab, movity\n                                        jajah plickers sifteo edmodo ifttt zimbra. Babblely odeo kaboodle\n                                        quora plaxo ideeli hulu weebly balihoo...\n                                    "
               )
             ]),
             _vm._v(" "),
@@ -59188,7 +59208,9 @@ var staticRenderFns = [
             _vm._v(" "),
             _c("h3", { staticClass: "timeline-header no-border" }, [
               _c("a", { attrs: { href: "#" } }, [_vm._v("Sarah Young")]),
-              _vm._v(" accepted your friend request\n                  ")
+              _vm._v(
+                " accepted your friend request\n                                    "
+              )
             ])
           ])
         ]),
@@ -59209,7 +59231,7 @@ var staticRenderFns = [
             _vm._v(" "),
             _c("div", { staticClass: "timeline-body" }, [
               _vm._v(
-                "\n                    Take me to your leader!\n                    Switzerland is small and neutral!\n                    We are more like Germany, ambitious and misunderstood!\n                  "
+                "\n                                        Take me to your leader!\n                                        Switzerland is small and neutral!\n                                        We are more like Germany, ambitious and misunderstood!\n                                    "
               )
             ]),
             _vm._v(" "),
