@@ -2209,7 +2209,7 @@ __webpack_require__.r(__webpack_exports__);
         swal({
           type: error,
           title: 'Ooops',
-          text: 'To big file'
+          text: 'Too big file'
         });
       }
     },

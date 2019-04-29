@@ -357,7 +357,7 @@
                     swal({
                         type: error,
                         title: 'Ooops',
-                        text: 'To big file',
+                        text: 'Too big file',
                     })
                 }
             },
