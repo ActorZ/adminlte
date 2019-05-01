@@ -9,7 +9,7 @@
                         <h5 class="widget-user-desc">Web Designer</h5>
                     </div>
                     <div class="widget-user-image">
-                        <img class="img-circle" src="" alt="User Avatar">
+                        <img class="img-circle" :src="getProfilePhoto()" alt="User Avatar">
                     </div>
                     <div class="box-footer">
                         <div class="row">
@@ -343,6 +343,10 @@
 
         },
         methods:{
+            getProfilePhoto(){
+                let prefix = (this.form.photo.match(/\//) ? '' : '/img/profile/');
+                return prefix + this.form.photo;
+            },
             updateProfile(e){
                 let file = e.target.files[0]
                 console.log(file)
