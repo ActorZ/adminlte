@@ -8,6 +8,9 @@ import { Form, HasError, AlertError } from 'vform'
 import moment from 'moment'
 import VueProgressBar from 'vue-progressbar'
 import swal from 'sweetalert2'
+import Gate from './gate'
+
+Vue.prototype.$gate = new Gate(window.user)
 
 window.Form = Form
 window.swal = swal

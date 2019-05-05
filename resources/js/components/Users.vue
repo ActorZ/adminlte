@@ -4,7 +4,7 @@
         <section class="content-header">
           
         </section>
-        <section class="content">
+        <section class="content" v-if="$gate.isAdmin()">
             <div class="box">
                     <div class="box-header with-border">
                           <h3 class="box-title">Users</h3>
@@ -169,9 +169,10 @@
               $('#addUserModal').modal('show');
            },
            showUsers(){
+              if (this.$gate.isAdmin()){
               this.$Progress.start();
               axios.get("api/user").then( ({ data }) => (this.users = data.data) );
-              this.$Progress.finish();
+              this.$Progress.finish();}
            },
            createUser(){
              this.$Progress.start();
